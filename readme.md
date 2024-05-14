@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/nano-currency/cli/raw/master/.github/banner.png" alt="Prompts" width="470" />
+  <img src="https://github.com/nano-currency/cli/raw/main/.github/banner.png" alt="Prompts" width="470" />
 </p>
 
 <h2 align="center">Nano Command Line Tool ($XNO)</h2>
@@ -8,15 +8,15 @@
 
 > In early development. Not ready for general use. 
 
-![line](https://github.com/nano-currency/cli/raw/master/.github/line.png)
+![line](https://github.com/nano-currency/cli/raw/main/.github/line.png)
 
 ## ❯ Install
 
 ```bash
-curl -sL "https://raw.github.com/nano-currency/cli/master/setup.sh" | sh
+curl -sL "https://raw.github.com/nano-currency/cli/main/setup.sh" | sh
 ```
 
-![line](https://github.com/nano-currency/cli/raw/master/.github/line.png)
+![line](https://github.com/nano-currency/cli/raw/main/.github/line.png)
 
 ## ❯ Contributing
 
