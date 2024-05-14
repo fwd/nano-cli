@@ -2,7 +2,7 @@
   <img src="https://github.com/nano-currency/cli/raw/main/.github/banner.png" alt="Prompts" width="470" />
 </p>
 
-<h2 align="center">Nano Command Line Tool ($XNO)</h2>
+<h2 align="center">Nano Command Line Tool</h2>
 
 <h3 align="center">Version: Alpha-0.1.0</h3>
 
