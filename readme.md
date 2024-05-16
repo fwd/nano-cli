@@ -11,7 +11,7 @@
 ## ❯ Install
 
 ```bash
-curl -sL "https://raw.github.com/fwd/nano-cli/main/setup.sh" | sh
+curl -sL "https://raw.github.com/fwd/nano-cli/main/install.sh" | sh
 ```
 
 ![line](https://github.com/fwd/nano-cli/raw/main/.github/line.png)
