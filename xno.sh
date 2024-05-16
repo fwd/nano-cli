@@ -1044,7 +1044,7 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "-setup" ]]; then
 
     # Function to display usage information
     usage() {
-        echo "Usage: $1 --path <NODE_PATH> --network <LIVE_OR_TEST> --rpc-port <PORT> --no-voting"
+        echo "Usage: setup --path <NODE_PATH> --network <LIVE_OR_TEST> --rpc-port <PORT> --no-voting"
         exit 1
     }
 
