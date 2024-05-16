@@ -1285,7 +1285,7 @@ if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgra
     
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/nano-currency/nano-node-cli/raw/dev/xno.sh" -o /usr/local/bin/xno
+        curl -sL "https://raw.githubusercontent.com/nano-currency/nano-node-cli/dev/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: DEV ${OLD_VERSION} -> ${NEW_VERSION}"
@@ -1294,7 +1294,7 @@ if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgra
 
     if [ "$2" = "" ] || [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/nano-currency/nano-node-cli/raw/main/xno.sh" -o /usr/local/bin/xno
+        curl -sL "https://raw.githubusercontent.com/nano-currency/nano-node-cli/main/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: STABLE ${OLD_VERSION} -> ${NEW_VERSION}"
