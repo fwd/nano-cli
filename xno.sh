@@ -32,7 +32,7 @@ if ! command -v jq &> /dev/null; then
 	if [  -n "$(uname -a | grep Ubuntu)" ]; then
 		sudo apt install jq -y
 	else
-		echo "${CYAN}Cloud${NC}: Could not auto install 'jq'. Please install it manually, before continuing."
+		echo "${CYAN}Error${NC}: Could not auto install 'jq'. Please install it manually, before continuing."
 		exit 0
 	fi
 fi
@@ -43,7 +43,7 @@ if ! command -v curl &> /dev/null; then
 	if [  -n "$(uname -a | grep Ubuntu)" ]; then
 		sudo apt install curl -y
 	else
-		echo "${CYAN}Cloud${NC}: Could not auto install 'curl'. Please install it manually, before continuing."
+		echo "${CYAN}Error${NC}: Could not auto install 'curl'. Please install it manually, before continuing."
 		exit 0
 	fi
 fi
@@ -76,7 +76,7 @@ fi
 
 
 ## Compare two decimals
-# FAUCET_BALANCE=$(n2 balance nano_1faucet7b6xjyha7m13objpn5ubkquzd6ska8kwopzf1ecbfmn35d1zey3ys --nano)
+# FAUCET_BALANCE=$(xno balance nano_1faucet7b6xjyha7m13objpn5ubkquzd6ska8kwopzf1ecbfmn35d1zey3ys --nano)
 # if [ 1 -eq "$(echo "${FAUCET_BALANCE} >= 5" | bc)" ]; then
 #         echo $FAUCET_BALANCE
 # else
@@ -101,7 +101,7 @@ function get_accounts() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -147,7 +147,7 @@ function get_balance() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -173,7 +173,7 @@ function get_balance() {
   if curl -sL --fail '[::1]:7076' -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -216,7 +216,7 @@ function list_accounts() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
       echo -n ""
   else
-      echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+      echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
       exit 0
   fi
   
@@ -284,7 +284,7 @@ function print_address() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -321,7 +321,7 @@ function print_balance() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -400,7 +400,7 @@ function print_balance() {
   metadata=$(find $DIR/.xno/data -maxdepth 1 -type f | wc -l | xargs)
 
   if [[ $(cat $DIR/.xno/title 2>/dev/null) == "" ]]; then
-      CLI_TITLE="        NANO CLI (N2)"
+      CLI_TITLE="        NANO CLI"
   else
       CLI_TITLE=$(cat $DIR/.xno/title)
   fi
@@ -462,7 +462,7 @@ EOF
   echo "${PURP}Node:${NC} ${GREEN}$(jq '.node_vendor' <<< "$NODE_VERSION" | tr -d '"') @ $FINAL_SYNC_PERCENT%${NC}"
   echo "============================="
 DOCS=$(cat <<EOF
-${GREEN}$ n2 [ balance | send | address ]${NC}
+${GREEN}$ xno [ balance | send | address ]${NC}
 EOF
 )
 cat <<EOF
@@ -488,7 +488,7 @@ function print_history() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -536,7 +536,7 @@ function print_pending() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -576,11 +576,11 @@ EOF
 
 LOCAL_DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
-$ n2 setup
-$ n2 balance
-$ n2 whois @moon
-$ n2 send @esteban 0.1
-$ n2 install (Coming Soon)
+$ xno setup
+$ xno balance
+$ xno whois @moon
+$ xno send @esteban 0.1
+$ xno install (Coming Soon)
 EOF
 )
 
@@ -598,10 +598,10 @@ EOF
 
 DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
-$ n2 setup
-$ n2 balance
-$ n2 send @esteban 0.1 ADDRESS
-$ n2 whois @moon
+$ xno setup
+$ xno balance
+$ xno send @esteban 0.1 ADDRESS
+$ xno whois @moon
 EOF
 )
 
@@ -742,12 +742,12 @@ if [[ "$1" = "receive" ]]; then
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     # if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-    #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+    #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
     #   exit 0
     # else
     #   NODE_PATH=$(cat $DIR/.xno/path)
@@ -816,12 +816,12 @@ if [[ "$1" = "node" ]]; then
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -857,12 +857,12 @@ if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; 
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -912,13 +912,13 @@ if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
         if [[ "$2" = "--text" ]]; then
             echo "off"
         else
-            echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+            echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         fi
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -965,7 +965,7 @@ fi
 if [[ "$1" = "node" ]] && [[ "$2" = "start" ]] || [[ "$1" = "start" ]] || [[ "$1" = "up" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -980,7 +980,7 @@ fi
 if [[ "$1" = "unlock" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -995,7 +995,7 @@ fi
 if [[ "$1" = "lock" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -1011,7 +1011,7 @@ fi
 if [[ "$1" = "node" ]] && [[ "$2" = "stop" ]] || [[ "$1" = "stop" ]] || [[ "$1" = "down" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -1038,15 +1038,15 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
 
     if [[ -z "$2" ]]; then
         echo "${GREEN}Available Packages${NC}:"
-        echo "$ n2 $1 node"
-        echo "$ n2 $1 vanity"
-        echo "$ n2 $1 pow-server"
-        echo "$ n2 $1 gpu-driver"
+        echo "$ xno $1 node"
+        echo "$ xno $1 vanity"
+        echo "$ xno $1 pow-server"
+        echo "$ xno $1 gpu-driver"
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'n2 config path PATH'. You will need ~200GB of space."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'xno config path PATH'. You will need ~200GB of space."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -1129,7 +1129,7 @@ EOF
 )
         read -p "$INSTALL_NOTE " YES
         if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
-            echo "${RED}N2${NC}: 1-Click Nano Node Coming Soon."
+            echo "${RED}xno${NC}: 1-Click Nano Node Coming Soon."
             # https://github.com/fwd/nano-docker
             # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
             # cd $DIR && git clone https://github.com/fwd/nano-docker.git
@@ -1206,38 +1206,32 @@ fi
 
 # if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
 #     OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-#     curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+#     curl -sL "https://github.com/fwd/nano-cli/raw/main/xno.sh" -o /usr/local/bin/xno
 #     sudo chmod +x /usr/local/bin/xno
 #     NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-#     echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
+#     echo "${GREEN}xno Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
 #     exit 0
 # fi
                                                   
 if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgrade" ] || [ "$1" = "--upgrade" ] || [ "$1" = "update" ]; then
+    
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/fwd/nano-cli/raw/dev/n2.sh" -o /usr/local/bin/xno
+        curl -sL "https://github.com/fwd/nano-cli/raw/dev/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: DEV ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
+
     if [ "$2" = "" ] || [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+        curl -sL "https://github.com/fwd/nano-cli/raw/main/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: STABLE ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    # curl -s -L "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
-    # sudo chmod +x /usr/local/bin/xno
-    # echo "${GREEN}XNO${NC}: Installed CLI $VERSION."
-    # OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    # curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
-    # sudo chmod +x /usr/local/bin/xno
-    # NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    # echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
     exit 0
 fi
 
@@ -1254,7 +1248,7 @@ if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
     rm $DIR/.xno/accounts
     rm $DIR/.xno/cache
     rm -rf $DIR/.xno/data
-    echo "CLI removed. Thanks for using N2. Hope to see you soon."
+    echo "CLI removed. Hope to see you soon."
     exit 0
 fi
 
@@ -1266,7 +1260,7 @@ fi
 # ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
                          
 cat <<EOF
-Commant not found. Use 'n2 help' to list commands.
+Commant not found. Use 'xno help' to list commands.
 EOF
 
 exit 0

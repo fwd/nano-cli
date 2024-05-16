@@ -131,12 +131,12 @@ if [[ "$1" = "receive" ]]; then
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     # if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-    #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+    #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
     #   exit 0
     # else
     #   NODE_PATH=$(cat $DIR/.xno/path)
@@ -205,12 +205,12 @@ if [[ "$1" = "node" ]]; then
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -246,12 +246,12 @@ if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; 
     if curl -sL --fail $NODE_URL -o /dev/null; then
         echo -n ""
     else
-        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+        echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -301,13 +301,13 @@ if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
         if [[ "$2" = "--text" ]]; then
             echo "off"
         else
-            echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+            echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
         fi
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -354,7 +354,7 @@ fi
 if [[ "$1" = "node" ]] && [[ "$2" = "start" ]] || [[ "$1" = "start" ]] || [[ "$1" = "up" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -369,7 +369,7 @@ fi
 if [[ "$1" = "unlock" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -384,7 +384,7 @@ fi
 if [[ "$1" = "lock" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -400,7 +400,7 @@ fi
 if [[ "$1" = "node" ]] && [[ "$2" = "stop" ]] || [[ "$1" = "stop" ]] || [[ "$1" = "down" ]]; then
     
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -427,15 +427,15 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
 
     if [[ -z "$2" ]]; then
         echo "${GREEN}Available Packages${NC}:"
-        echo "$ n2 $1 node"
-        echo "$ n2 $1 vanity"
-        echo "$ n2 $1 pow-server"
-        echo "$ n2 $1 gpu-driver"
+        echo "$ xno $1 node"
+        echo "$ xno $1 vanity"
+        echo "$ xno $1 pow-server"
+        echo "$ xno $1 gpu-driver"
         exit 0
     fi
 
     if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'n2 config path PATH'. You will need ~200GB of space."
+      echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'xno config path PATH'. You will need ~200GB of space."
       exit 0
     else
       NODE_PATH=$(cat $DIR/.xno/path)
@@ -518,7 +518,7 @@ EOF
 )
         read -p "$INSTALL_NOTE " YES
         if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
-            echo "${RED}N2${NC}: 1-Click Nano Node Coming Soon."
+            echo "${RED}xno${NC}: 1-Click Nano Node Coming Soon."
             # https://github.com/fwd/nano-docker
             # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
             # cd $DIR && git clone https://github.com/fwd/nano-docker.git

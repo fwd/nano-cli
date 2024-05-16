@@ -60,38 +60,32 @@ fi
 
 # if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
 #     OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-#     curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+#     curl -sL "https://github.com/fwd/nano-cli/raw/main/xno.sh" -o /usr/local/bin/xno
 #     sudo chmod +x /usr/local/bin/xno
 #     NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-#     echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
+#     echo "${GREEN}xno Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
 #     exit 0
 # fi
                                                   
 if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgrade" ] || [ "$1" = "--upgrade" ] || [ "$1" = "update" ]; then
+    
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/fwd/nano-cli/raw/dev/n2.sh" -o /usr/local/bin/xno
+        curl -sL "https://github.com/fwd/nano-cli/raw/dev/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: DEV ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
+
     if [ "$2" = "" ] || [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
         OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-        curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+        curl -sL "https://github.com/fwd/nano-cli/raw/main/xno.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
         NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
         echo "${GREEN}NANO CLI Installed${NC}: STABLE ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    # curl -s -L "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
-    # sudo chmod +x /usr/local/bin/xno
-    # echo "${GREEN}XNO${NC}: Installed CLI $VERSION."
-    # OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    # curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
-    # sudo chmod +x /usr/local/bin/xno
-    # NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    # echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
     exit 0
 fi
 
@@ -108,7 +102,7 @@ if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
     rm $DIR/.xno/accounts
     rm $DIR/.xno/cache
     rm -rf $DIR/.xno/data
-    echo "CLI removed. Thanks for using N2. Hope to see you soon."
+    echo "CLI removed. Hope to see you soon."
     exit 0
 fi
 
@@ -120,7 +114,7 @@ fi
 # ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
                          
 cat <<EOF
-Commant not found. Use 'n2 help' to list commands.
+Commant not found. Use 'xno help' to list commands.
 EOF
 
 exit 0

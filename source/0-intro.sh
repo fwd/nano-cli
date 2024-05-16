@@ -32,7 +32,7 @@ if ! command -v jq &> /dev/null; then
 	if [  -n "$(uname -a | grep Ubuntu)" ]; then
 		sudo apt install jq -y
 	else
-		echo "${CYAN}Cloud${NC}: Could not auto install 'jq'. Please install it manually, before continuing."
+		echo "${CYAN}Error${NC}: Could not auto install 'jq'. Please install it manually, before continuing."
 		exit 0
 	fi
 fi
@@ -43,7 +43,7 @@ if ! command -v curl &> /dev/null; then
 	if [  -n "$(uname -a | grep Ubuntu)" ]; then
 		sudo apt install curl -y
 	else
-		echo "${CYAN}Cloud${NC}: Could not auto install 'curl'. Please install it manually, before continuing."
+		echo "${CYAN}Error${NC}: Could not auto install 'curl'. Please install it manually, before continuing."
 		exit 0
 	fi
 fi

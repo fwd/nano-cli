@@ -1,7 +1,7 @@
 
 
 ## Compare two decimals
-# FAUCET_BALANCE=$(n2 balance nano_1faucet7b6xjyha7m13objpn5ubkquzd6ska8kwopzf1ecbfmn35d1zey3ys --nano)
+# FAUCET_BALANCE=$(xno balance nano_1faucet7b6xjyha7m13objpn5ubkquzd6ska8kwopzf1ecbfmn35d1zey3ys --nano)
 # if [ 1 -eq "$(echo "${FAUCET_BALANCE} >= 5" | bc)" ]; then
 #         echo $FAUCET_BALANCE
 # else
@@ -26,7 +26,7 @@ function get_accounts() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -72,7 +72,7 @@ function get_balance() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -98,7 +98,7 @@ function get_balance() {
   if curl -sL --fail '[::1]:7076' -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -141,7 +141,7 @@ function list_accounts() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
       echo -n ""
   else
-      echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+      echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
       exit 0
   fi
   
@@ -209,7 +209,7 @@ function print_address() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -246,7 +246,7 @@ function print_balance() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -325,7 +325,7 @@ function print_balance() {
   metadata=$(find $DIR/.xno/data -maxdepth 1 -type f | wc -l | xargs)
 
   if [[ $(cat $DIR/.xno/title 2>/dev/null) == "" ]]; then
-      CLI_TITLE="        NANO CLI (N2)"
+      CLI_TITLE="        NANO CLI"
   else
       CLI_TITLE=$(cat $DIR/.xno/title)
   fi
@@ -387,7 +387,7 @@ EOF
   echo "${PURP}Node:${NC} ${GREEN}$(jq '.node_vendor' <<< "$NODE_VERSION" | tr -d '"') @ $FINAL_SYNC_PERCENT%${NC}"
   echo "============================="
 DOCS=$(cat <<EOF
-${GREEN}$ n2 [ balance | send | address ]${NC}
+${GREEN}$ xno [ balance | send | address ]${NC}
 EOF
 )
 cat <<EOF
@@ -413,7 +413,7 @@ function print_history() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
@@ -461,7 +461,7 @@ function print_pending() {
   if curl -sL --fail $NODE_URL -o /dev/null; then
     echo -n ""
   else
-    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'n2 setup' for more information."
+    echo "${RED}Error:${NC} ${CYAN}Node offline.${NC} Use 'xno setup' for more information."
     exit 0
   fi
 
