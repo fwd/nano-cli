@@ -520,7 +520,7 @@ EOF
         if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
             echo "${RED}N2${NC}: 1-Click Nano Node Coming Soon."
             # https://github.com/fwd/nano-docker
-            # curl -L "https://github.com/fwd/nano-docker/raw/master/install.sh" | sh
+            # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
             # cd $DIR && git clone https://github.com/fwd/nano-docker.git
             # LATEST=$(curl -sL https://api.github.com/repos/nanocurrency/nano-node/releases/latest | jq -r ".tag_name")
             # cd $DIR/nano-docker && sudo ./setup.sh -s -t $LATEST

@@ -563,10 +563,10 @@ if [[ $1 == "clear-cache" ]]; then
 fi
 
 if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
-    OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/n2 | awk -F '=' '{print $2}' | tr -d '"')
-    curl -sL "https://github.com/fwd/n2/raw/master/n2.sh" -o /usr/local/bin/n2
-    sudo chmod +x /usr/local/bin/n2
-    NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/n2 | awk -F '=' '{print $2}' | tr -d '"')
+    OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+    curl -sL "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+    sudo chmod +x /usr/local/bin/xno
+    NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
     echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
     exit 0
 fi

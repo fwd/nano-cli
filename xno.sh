@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #################################
-## N2: Nano Command Line Tool  ##
-## (c) 2018-3001 @nano2dev     ##
+## XNO: Nano Command Line Tool ##
+## (c) 2018 - 3001 @nano2dev   ##
 ## Released under MIT License  ##
 #################################
 
-VERSION="ALPHA-0.2.4"
+VERSION="Alpha-0.1.0"
 GREEN=$'\e[0;32m'
 BLUE=$'\e[0;34m'
 CYAN=$'\e[1;36m'
@@ -47,6 +47,7 @@ if ! command -v curl &> /dev/null; then
 		exit 0
 	fi
 fi
+
 function nano_to_raw() {
   if [ "$1" == "0" ]; then
     echo "0"
@@ -1130,7 +1131,7 @@ EOF
         if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
             echo "${RED}N2${NC}: 1-Click Nano Node Coming Soon."
             # https://github.com/fwd/nano-docker
-            # curl -L "https://github.com/fwd/nano-docker/raw/master/install.sh" | sh
+            # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
             # cd $DIR && git clone https://github.com/fwd/nano-docker.git
             # LATEST=$(curl -sL https://api.github.com/repos/nanocurrency/nano-node/releases/latest | jq -r ".tag_name")
             # cd $DIR/nano-docker && sudo ./setup.sh -s -t $LATEST
@@ -1185,8 +1186,8 @@ NODE_VERSION=$(curl -s $NODE_URL \
 EOF
   ))
 
-    echo "${GREEN}NANO NODE:${NC} $(jq '.node_vendor' <<< "$NODE_VERSION" | tr -d '"')"
     echo "${GREEN}NANO CLI:${NC} $VERSION"
+    echo "${GREEN}NANO NODE:${NC} $(jq '.node_vendor' <<< "$NODE_VERSION" | tr -d '"')"
 
     else
         echo "${GREEN}NANO CLI:${NC} $VERSION"
@@ -1205,21 +1206,21 @@ fi
                                                   
 if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "install" ] || [ "$1" = "--install" ]  || [ "$1" = "--update" ] || [ "$1" = "update" ]; then
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
-        sudo rm /usr/local/bin/n2
-        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/n2
-        sudo chmod +x /usr/local/bin/n2
+        sudo rm /usr/local/bin/xno
+        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/xno
+        sudo chmod +x /usr/local/bin/xno
         echo "${GREEN}N2${NC}: Installed latest development version."
         exit 0
     fi
     if [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
-        sudo rm /usr/local/bin/n2
-        curl -s -L "https://github.com/fwd/n2/raw/master/n2.sh" -o /usr/local/bin/n2
-        sudo chmod +x /usr/local/bin/n2
+        sudo rm /usr/local/bin/xno
+        curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+        sudo chmod +x /usr/local/bin/xno
         echo "${GREEN}N2${NC}: Installed N2 $VERSION."
         exit 0
     fi
-    curl -s -L "https://github.com/fwd/n2/raw/master/n2.sh" -o /usr/local/bin/n2
-    sudo chmod +x /usr/local/bin/n2
+    curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+    sudo chmod +x /usr/local/bin/xno
     echo "${GREEN}N2${NC}: Installed N2 $VERSION."
     exit 0
 fi
@@ -1232,7 +1233,7 @@ fi
 #  ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝
 
 if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
-    sudo rm /usr/local/bin/n2
+    sudo rm /usr/local/bin/xno
     rm $DIR/.n2/wallet
     rm $DIR/.n2/accounts
     rm $DIR/.n2/cache

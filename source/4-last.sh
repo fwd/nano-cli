@@ -60,21 +60,21 @@ fi
                                                   
 if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "install" ] || [ "$1" = "--install" ]  || [ "$1" = "--update" ] || [ "$1" = "update" ]; then
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
-        sudo rm /usr/local/bin/n2
-        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/n2
-        sudo chmod +x /usr/local/bin/n2
+        sudo rm /usr/local/bin/xno
+        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/xno
+        sudo chmod +x /usr/local/bin/xno
         echo "${GREEN}N2${NC}: Installed latest development version."
         exit 0
     fi
     if [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
-        sudo rm /usr/local/bin/n2
-        curl -s -L "https://github.com/fwd/n2/raw/master/n2.sh" -o /usr/local/bin/n2
-        sudo chmod +x /usr/local/bin/n2
+        sudo rm /usr/local/bin/xno
+        curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+        sudo chmod +x /usr/local/bin/xno
         echo "${GREEN}N2${NC}: Installed N2 $VERSION."
         exit 0
     fi
-    curl -s -L "https://github.com/fwd/n2/raw/master/n2.sh" -o /usr/local/bin/n2
-    sudo chmod +x /usr/local/bin/n2
+    curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+    sudo chmod +x /usr/local/bin/xno
     echo "${GREEN}N2${NC}: Installed N2 $VERSION."
     exit 0
 fi
@@ -87,7 +87,7 @@ fi
 #  ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝
 
 if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
-    sudo rm /usr/local/bin/n2
+    sudo rm /usr/local/bin/xno
     rm $DIR/.n2/wallet
     rm $DIR/.n2/accounts
     rm $DIR/.n2/cache

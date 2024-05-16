@@ -335,7 +335,7 @@ EOF
         #   exit 0
         # fi
 
-            # /usr/local/bin/n2 version
+            # /usr/local/bin/xno version
         ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
         -H "session: $(cat $DIR/.n2/session)" \
