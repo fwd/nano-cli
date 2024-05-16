@@ -599,7 +599,8 @@ EOF
 DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
 $ xno version
-$ xno install
+$ xno setup
+$ xno install PLUGIN_NAME
 EOF
 )
 
@@ -1022,7 +1023,7 @@ if [[ "$1" = "node" ]] && [[ "$2" = "stop" ]] || [[ "$1" = "stop" ]] || [[ "$1" 
 fi
 
 
-if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [[ "$1" = "i" ]]; then
+if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "-setup" ]]; then
 
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         echo -n ""
@@ -1034,110 +1035,181 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
         exit 0
     fi
 
-    if [[ -z "$2" ]]; then
-        echo "${GREEN}Available Packages${NC}:"
-        echo "$ xno $1 node"
-        echo "$ xno $1 vanity"
-        echo "$ xno $1 pow-server"
-        echo "$ xno $1 gpu-driver"
-        exit 0
+
+    # Initialize variables with default values
+    NODE_PATH=""
+    LIVE_OR_TEST=""
+    RPC_PORT=8899  # Default value as given
+    NO_VOTING=false
+
+    # Function to display usage information
+    usage() {
+        echo "Usage: $0 --path <NODE_PATH> --network <LIVE_OR_TEST> --rpc-port <PORT> --no-voting"
+        exit 1
+    }
+
+    # Parse command line arguments
+    while [[ "$#" -gt 0 ]]; do
+        case $1 in
+            --path)
+                NODE_PATH="$2"
+                shift 2
+                ;;
+            --network)
+                LIVE_OR_TEST="$2"
+                shift 2
+                ;;
+            --rpc-port)
+                RPC_PORT="$2"
+                shift 2
+                ;;
+            --no-voting)
+                NO_VOTING=true
+                shift 1
+                ;;
+            *)
+                echo "Unknown parameter passed: $1"
+                usage
+                ;;
+        esac
+    done
+
+    # Validate required arguments
+    if [[ -z "$NODE_PATH" || -z "$LIVE_OR_TEST" ]]; then
+        echo "Error: --path and --network are required arguments."
+        usage
     fi
 
-    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
-      echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'xno config path PATH'. You will need ~200GB of space."
-      exit 0
-    else
-      NODE_PATH=$(cat $DIR/.xno/path)
-    fi
+    # Display the values of the variables
+    echo "NODE_PATH: $NODE_PATH"
+    echo "LIVE_OR_TEST: $LIVE_OR_TEST"
+    echo "RPC_PORT: $RPC_PORT"
+    echo "NO_VOTING: $NO_VOTING"
+
+    exit 0
+
+    # if [[ -z "$2" ]]; then
+    #     echo "${GREEN}Available Packages${NC}:"
+    #     echo "$ xno $1 node"
+    #     echo "$ xno $1 vanity"
+    #     echo "$ xno $1 pow-server"
+    #     echo "$ xno $1 gpu-driver"
+    #     exit 0
+    # fi
+
+    # if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
+    #   echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'xno config path PATH'. You will need ~200GB of space."
+    #   exit 0
+    # else
+    #   NODE_PATH=$(cat $DIR/.xno/path)
+    # fi
 
     # Coming soon
-    if [[ "$2" = "pow" ]] || [[ "$2" = "--pow" ]] || [[ "$2" = "pow-proxy" ]] || [[ "$2" = "pow-server" ]]; then
-        read -p 'Setup Nano PoW Server: Enter 'y': ' YES
-        if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
-            # TODO
-            # @reboot ~/nano-work-server/target/release/nano-work-server --gpu 0:0
-            # $DIR/nano-work-server/target/release/nano-work-server --cpu 2
-            # $DIR/nano-work-server/target/release/nano-work-server --gpu 0:0
-            exit 0
-        fi
-        echo "Canceled"
-        exit 0
-    fi
+    # if [[ "$2" = "pow" ]] || [[ "$2" = "--pow" ]] || [[ "$2" = "pow-proxy" ]] || [[ "$2" = "pow-server" ]]; then
+    #     read -p 'Setup Nano PoW Server: Enter 'y': ' YES
+    #     if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
+    #         # TODO
+    #         # @reboot ~/nano-work-server/target/release/nano-work-server --gpu 0:0
+    #         # $DIR/nano-work-server/target/release/nano-work-server --cpu 2
+    #         # $DIR/nano-work-server/target/release/nano-work-server --gpu 0:0
+    #         exit 0
+    #     fi
+    #     echo "Canceled"
+    #     exit 0
+    # fi
 
     # Sorta working
-    if [[ "$2" = "work-server" ]] || [[ "$2" = "work" ]]; then
+    # if [[ "$2" = "work-server" ]] || [[ "$2" = "work" ]]; then
         
-        read -p 'Setup Nano Work Server. Enter 'y' to continue: ' YES
+    #     read -p 'Setup Nano Work Server. Enter 'y' to continue: ' YES
 
-        if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
+    #     if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
 
-            if ! [ -x "$(command -v cargo)" ]; then
-                sudo apt install ocl-icd-opencl-dev gcc build-essential -y
-                curl https://sh.rustup.rs -sSf | sh
-                source $DIR/.cargo/env
-            fi
+    #         if ! [ -x "$(command -v cargo)" ]; then
+    #             sudo apt install ocl-icd-opencl-dev gcc build-essential -y
+    #             curl https://sh.rustup.rs -sSf | sh
+    #             source $DIR/.cargo/env
+    #         fi
             
-            git clone https://github.com/nanocurrency/nano-work-server.git $DIR/nano-work-server
-            cd $DIR/nano-work-server && cargo build --release
+    #         git clone https://github.com/nanocurrency/nano-work-server.git $DIR/nano-work-server
+    #         cd $DIR/nano-work-server && cargo build --release
 
-            sudo crontab -l > cronjob
-            #echo new cron into cron file
-            echo "@reboot $DIR/nano-work-server/target/release/nano-work-server --gpu 0:0 -l [::1]:7078" >> cronjob
-            #install new cron file
-            sudo crontab cronjob
-            rm cronjob
+    #         sudo crontab -l > cronjob
+    #         #echo new cron into cron file
+    #         echo "@reboot $DIR/nano-work-server/target/release/nano-work-server --gpu 0:0 -l [::1]:7078" >> cronjob
+    #         #install new cron file
+    #         sudo crontab cronjob
+    #         rm cronjob
 
-            exit 0
-        fi
+    #         exit 0
+    #     fi
 
-        echo "Canceled"
-        exit 0
+    #     echo "Canceled"
+    #     exit 0
 
-    fi
+    # fi
 
-    if [[ "$2" = "gpu" ]] || [[ "$2" = "gpu-driver" ]] || [[ "$2" = "gpu-drivers" ]]; then
+    # if [[ "$2" = "gpu" ]] || [[ "$2" = "gpu-driver" ]] || [[ "$2" = "gpu-drivers" ]]; then
         
-        read -p 'Setup NVIDIA Drivers. Enter 'Y' to continue: ' YES
+    #     read -p 'Setup NVIDIA Drivers. Enter 'Y' to continue: ' YES
 
-        if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
+    #     if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
             
-            # GPU
-            apt install ubuntu-drivers-common
-            sudo apt-get purge nvidia*
-            sudo ubuntu-drivers autoinstall
+    #         # GPU
+    #         apt install ubuntu-drivers-common
+    #         sudo apt-get purge nvidia*
+    #         sudo ubuntu-drivers autoinstall
 
-            exit 0
-        fi
+    #         exit 0
+    #     fi
 
-        echo "Canceled"
-        exit 0
+    #     echo "Canceled"
+    #     exit 0
 
-    fi
+    # fi
 
 
-    if [[ "$2" = "" ]] || [[ "$2" = "node" ]]; then
-        INSTALL_NOTE=$(cat <<EOF
-==================================
-         ${GREEN}Setup New Node${NC}
-==================================
-${GREEN}CPU${NC}:>=4${GREEN} RAM${NC}:>=4GB${GREEN} SSD${NC}:>=500GB
-==================================
-Press 'Y' to continue:
-EOF
-)
-        read -p "$INSTALL_NOTE " YES
-        if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
-            echo "${RED}xno${NC}: 1-Click Nano Node Coming Soon."
-            # https://github.com/fwd/nano-docker
-            # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
-            # cd $DIR && git clone https://github.com/fwd/nano-docker.git
-            # LATEST=$(curl -sL https://api.github.com/repos/nanocurrency/nano-node/releases/latest | jq -r ".tag_name")
-            # cd $DIR/nano-docker && sudo ./setup.sh -s -t $LATEST
-            exit 0
-        fi
-        echo "Canceled"
-        exit 0
-    fi
+#     if [[ "$2" = "" ]] || [[ "$2" = "node" ]]; then
+#         INSTALL_NOTE=$(cat <<EOF
+# ==================================
+#          ${GREEN}Setup New Node${NC}
+# ==================================
+# ${GREEN}CPU${NC}:>=4${GREEN} RAM${NC}:>=4GB${GREEN} SSD${NC}:>=500GB
+# ==================================
+# Press 'Y' to continue:
+# EOF
+# )
+#         read -p "$INSTALL_NOTE " YES
+#         if [[ "$YES" = "y" ]] || [[ "$YES" = "Y" ]]; then
+
+#             xno setup \
+#               --path <NODE_PATH> \
+#               --network <LIVE_OR_TEST> \
+#               --rpc-port 8899 \
+#               --no-voting 
+
+#             if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
+#               echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'xno config path PATH'."
+#               exit 0
+#             else
+#               NODE_PATH=$(cat $DIR/.xno/path)
+#             fi
+
+#             git clone https://github.com/fwd/nano-docker.git
+#             cd nano-docker && sudo ./setup.sh -f -t V26.1 -m -p 8080
+
+#             # echo "${RED}xno${NC}: 1-Click Nano Node Coming Soon."
+#             # https://github.com/fwd/nano-docker
+#             # curl -L "https://github.com/fwd/nano-docker/raw/main/install.sh" | sh
+#             # cd $DIR && git clone https://github.com/fwd/nano-docker.git
+#             # LATEST=$(curl -sL https://api.github.com/repos/nanocurrency/nano-node/releases/latest | jq -r ".tag_name")
+#             # cd $DIR/nano-docker && sudo ./setup.sh -s -t $LATEST
+
+#             exit 0
+#         fi
+#         echo "Canceled"
+#         exit 0
+#     fi
 
 fi
 

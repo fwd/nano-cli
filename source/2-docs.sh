@@ -24,7 +24,8 @@
 DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
 $ xno version
-$ xno install
+$ xno setup
+$ xno install PLUGIN_NAME
 EOF
 )
 
