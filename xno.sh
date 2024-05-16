@@ -576,13 +576,20 @@ EOF
 
 LOCAL_DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
-$ xno setup
-$ xno balance
-$ xno whois @moon
-$ xno send @esteban 0.1
-$ xno install (Coming Soon)
+$ xno version
+$ xno install
 EOF
 )
+
+# LOCAL_DOCS=$(cat <<EOF
+# ${GREEN}USAGE:${NC}
+# $ xno setup
+# $ xno balance
+# $ xno whois @moon
+# $ xno send @esteban 0.1
+# $ xno install (Coming Soon)
+# EOF
+# )
 
 OPTIONS_DOCS=$(cat <<EOF
 Options
@@ -1117,7 +1124,7 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
     fi
 
 
-    if [[ "$2" = "node" ]]; then
+    if [[ "$2" = "" ]] || [[ "$2" = "node" ]]; then
         INSTALL_NOTE=$(cat <<EOF
 ==================================
          ${GREEN}Setup New Node${NC}
@@ -1141,9 +1148,7 @@ EOF
         exit 0
     fi
 
-
 fi
-
 
 # ██╗  ██╗███████╗██╗     ██████╗ 
 # ██║  ██║██╔════╝██║     ██╔══██╗

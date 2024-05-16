@@ -1,13 +1,20 @@
 
 LOCAL_DOCS=$(cat <<EOF
 ${GREEN}USAGE:${NC}
-$ xno setup
-$ xno balance
-$ xno whois @moon
-$ xno send @esteban 0.1
-$ xno install (Coming Soon)
+$ xno version
+$ xno install
 EOF
 )
+
+# LOCAL_DOCS=$(cat <<EOF
+# ${GREEN}USAGE:${NC}
+# $ xno setup
+# $ xno balance
+# $ xno whois @moon
+# $ xno send @esteban 0.1
+# $ xno install (Coming Soon)
+# EOF
+# )
 
 OPTIONS_DOCS=$(cat <<EOF
 Options

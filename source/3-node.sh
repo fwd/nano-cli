@@ -506,7 +506,7 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
     fi
 
 
-    if [[ "$2" = "node" ]]; then
+    if [[ "$2" = "" ]] || [[ "$2" = "node" ]]; then
         INSTALL_NOTE=$(cat <<EOF
 ==================================
          ${GREEN}Setup New Node${NC}
@@ -530,6 +530,4 @@ EOF
         exit 0
     fi
 
-
 fi
-
