@@ -6,7 +6,7 @@
 ## Released under MIT License  ##
 #################################
 
-VERSION="Alpha-0.1.0"
+VERSION="DEV-0.1.1"
 GREEN=$'\e[0;32m'
 BLUE=$'\e[0;34m'
 CYAN=$'\e[1;36m'
@@ -1044,12 +1044,12 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "-setup" ]]; then
 
     # Function to display usage information
     usage() {
-        echo "Usage: $0 --path <NODE_PATH> --network <LIVE_OR_TEST> --rpc-port <PORT> --no-voting"
+        echo "Usage: $1 --path <NODE_PATH> --network <LIVE_OR_TEST> --rpc-port <PORT> --no-voting"
         exit 1
     }
 
     # Parse command line arguments
-    while [[ "$#" -gt 0 ]]; do
+    while [[ "$#" -gt 1 ]]; do
         case $1 in
             --path)
                 NODE_PATH="$2"
@@ -1068,7 +1068,7 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "-setup" ]]; then
                 shift 1
                 ;;
             *)
-                echo "Unknown parameter passed: $1"
+                echo "Unknown parameter passed: $2"
                 usage
                 ;;
         esac
