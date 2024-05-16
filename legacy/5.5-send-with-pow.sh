@@ -1,11 +1,11 @@
 
 function send_with_pow() {
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -30,11 +30,11 @@ function send_with_pow() {
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     SEND_ATTEMPT=$(curl -s '[::1]:7076' \

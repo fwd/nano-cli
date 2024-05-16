@@ -16,7 +16,7 @@ GREEN2=$'\e[1;92m'
 DIR=$(eval echo "~$different_user")
 
 # Project Folder
-mkdir -p $DIR/.n2
+mkdir -p $DIR/.xno
 
 # Install '7z' if needed.
 # if ! command -v 7z &> /dev/null; then

@@ -16,11 +16,11 @@ function findAddress() {
 
 function get_accounts() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -30,11 +30,11 @@ function get_accounts() {
     exit 0
   fi
 
-  if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
       WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-      echo $WALLET_ID > $DIR/.n2/wallet
+      echo $WALLET_ID > $DIR/.xno/wallet
   else
-      WALLET_ID=$(cat $DIR/.n2/wallet)
+      WALLET_ID=$(cat $DIR/.xno/wallet)
   fi
 
   accounts=$(curl -s '[::1]:7076' \
@@ -62,11 +62,11 @@ EOF
 
 function get_balance() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -102,11 +102,11 @@ function get_balance() {
     exit 0
   fi
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
 ACCOUNT=$(curl -s $NODE_URL \
@@ -131,11 +131,11 @@ EOF
 
 function list_accounts() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-    NODE_URL=$(cat $DIR/.n2/node)
+    NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -199,11 +199,11 @@ EOF
 
 function print_address() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -236,11 +236,11 @@ function print_address() {
 
 function print_balance() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -321,13 +321,13 @@ function print_balance() {
     pending_in_decimal_value=$(raw_to_nano $account_pending)
   fi
 
-  mkdir -p $DIR/.n2/data
-  metadata=$(find $DIR/.n2/data -maxdepth 1 -type f | wc -l | xargs)
+  mkdir -p $DIR/.xno/data
+  metadata=$(find $DIR/.xno/data -maxdepth 1 -type f | wc -l | xargs)
 
-  if [[ $(cat $DIR/.n2/title 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/title 2>/dev/null) == "" ]]; then
       CLI_TITLE="        NANO CLI (N2)"
   else
-      CLI_TITLE=$(cat $DIR/.n2/title)
+      CLI_TITLE=$(cat $DIR/.xno/title)
   fi
 
   if [[ "$3" == "--json" ]] || [[ "$4" == "--json" ]] || [[ "$5" == "--json" ]]; then
@@ -403,11 +403,11 @@ EOF
 
 function print_history() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -451,11 +451,11 @@ EOF
 
 function print_pending() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then

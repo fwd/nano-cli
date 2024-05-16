@@ -2,11 +2,11 @@
 
 function local_send() {
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -26,11 +26,11 @@ function local_send() {
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     UUID=$(uuidgen)
@@ -38,11 +38,11 @@ function local_send() {
 
     if [[ -z "$4" ]] || [[ "$4" == "--json" ]]; then
 
-        if [[ $(cat $DIR/.n2/main 2>/dev/null) == "" ]]; then
+        if [[ $(cat $DIR/.xno/main 2>/dev/null) == "" ]]; then
             SRC=$(jq '.accounts[0]' <<< "$accounts_on_file" | tr -d '"') 
-            echo $SRC > $DIR/.n2/main
+            echo $SRC > $DIR/.xno/main
         else
-            SRC=$(cat $DIR/.n2/main)
+            SRC=$(cat $DIR/.xno/main)
         fi
         
     else
@@ -222,11 +222,11 @@ fi
 
 if [[ $1 == "add" ]] || [[ $1 == "create" ]] || [[ $1 == "account_create" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -236,11 +236,11 @@ if [[ $1 == "add" ]] || [[ $1 == "create" ]] || [[ $1 == "account_create" ]]; th
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     if [[ "$2" == "--json" ]] || [[ "$3" == "--json" ]]; then
@@ -282,11 +282,11 @@ fi
 
 if [[ "$1" = "add_vanity" ]] || [[ "$1" = "vanity_add" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -303,11 +303,11 @@ if [[ "$1" = "add_vanity" ]] || [[ "$1" = "vanity_add" ]]; then
         VANITY_PATH="$DIR/.cargo/bin/nano-vanity"
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     GPU_INSTALLED=$(lspci -vnnn | perl -lne 'print if /^\d+\:.+(\[\S+\:\S+\])/' | grep VGA)
@@ -353,11 +353,11 @@ if [[ "$1" = "adhoc_account" ]] || [[ "$1" = "adhoc_add" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -367,11 +367,11 @@ if [[ "$1" = "adhoc_account" ]] || [[ "$1" = "adhoc_add" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     # VANITY_ADDRESS=$(nano-vanity $2 --no-progress --gpu-device 0 --gpu-platform 0 --simple-output)
@@ -399,11 +399,11 @@ fi
 
 if [[ $1 == "remove" ]] || [[ $1 == "rm" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -418,11 +418,11 @@ if [[ $1 == "remove" ]] || [[ $1 == "rm" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     accounts_on_file=$(get_accounts)
@@ -471,11 +471,11 @@ fi
 if [[ $1 == "wallet" ]]; then
 
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -485,11 +485,11 @@ if [[ $1 == "wallet" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     WALLET=$(curl -s $NODE_URL \
@@ -557,22 +557,13 @@ if [[ $1 == "b" ]] || [[ $1 == "balance" ]] || [[ $1 == "account" ]]; then
 fi
 
 if [[ $1 == "clear-cache" ]]; then
-    rm -rf "$DIR/.n2"
+    rm -rf "$DIR/.xno"
     echo "${RED}N2${NC}: Cache cleared."
     exit 0
 fi
 
-if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
-    OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    curl -sL "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
-    sudo chmod +x /usr/local/bin/xno
-    NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
-    echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
-    exit 0
-fi
-
 if [[ $1 == "set" ]] || [[ $1 == "--set" ]]  || [[ $1 == "--config" ]]|| [[ $1 == "config" ]]; then
-    echo $3 > "$DIR/.n2/$2"
+    echo $3 > "$DIR/.xno/$2"
     exit 0
 fi
 
@@ -586,7 +577,7 @@ if [[ $1 == "save" ]]; then
         exit 0
     fi
     if jq -e . >/dev/null 2>&1 <<<"$3"; then
-        echo $3 > "$DIR/.n2/$2"
+        echo $3 > "$DIR/.xno/$2"
     else
         echo "Failed to parse JSON"
     fi

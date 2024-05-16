@@ -1,6 +1,6 @@
 function cloud_register() {
 
-        if [[ $(cat $DIR/.n2/session 2>/dev/null) != "" ]]; then
+        if [[ $(cat $DIR/.xno/session 2>/dev/null) != "" ]]; then
             echo "${CYAN}Cloud${NC}: You're already logged in. Use 'n2 logout' to logout."
             exit 0
         fi
@@ -54,16 +54,16 @@ EOF
             exit 0
         fi
 
-        rm $DIR/.n2/session 2>/dev/null
+        rm $DIR/.xno/session 2>/dev/null
 
-        echo $(jq -r '.session' <<< "$REGISTER_ATTEMPT") >> $DIR/.n2/session
+        echo $(jq -r '.session' <<< "$REGISTER_ATTEMPT") >> $DIR/.xno/session
 
         # echo
         # sleep 0.1
 
         ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
 
@@ -96,7 +96,7 @@ EOF
 
             VERIFY_ATTEMPT=$(curl -s "https://nano.to/cloud/verify?code=$EMAIL_OTP" \
             -H "Accept: application/json" \
-            -H "session: $(cat $DIR/.n2/session)" \
+            -H "session: $(cat $DIR/.xno/session)" \
             -H "Content-Type:application/json" \
             --request POST)
 

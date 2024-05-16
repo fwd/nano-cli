@@ -2,7 +2,7 @@
 
 function cloud_login() {
 
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) != "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) != "" ]]; then
       echo "${CYAN}Cloud${NC}: You're already logged in. Use 'n2 logout' to logout."
       exit 0
     fi
@@ -86,9 +86,9 @@ EOF
       exit 0
     fi
 
-    rm $DIR/.n2/session 2>/dev/null
+    rm $DIR/.xno/session 2>/dev/null
 
-    echo $(jq -r '.session' <<< "$LOGIN_ATTEMPT") >> $DIR/.n2/session
+    echo $(jq -r '.session' <<< "$LOGIN_ATTEMPT") >> $DIR/.xno/session
 
     # echo
 

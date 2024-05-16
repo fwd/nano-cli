@@ -22,12 +22,12 @@ EOF
 
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
 
     if [[ $(jq -r '.code' <<< "$ACCOUNT") == "401" ]]; then
-        rm $DIR/.n2/session
+        rm $DIR/.xno/session
         # echo
         echo "==============================="
         echo "    LOGGED OUT FOR SECURITY    "
@@ -41,7 +41,7 @@ EOF
     if [[ "$3" == "qrcode" ]] || [[ "$3" == "--qrcode" ]] || [[ "$3" == "qr" ]] || [[ "$3" == "-qr" ]] || [[ "$3" == "--qr" ]]; then
         OACCOUNT=$(curl -s "https://nano.to/$2/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
         address=$(jq -r '.address' <<< "$OACCOUNT")
@@ -54,7 +54,7 @@ EOF
         echo "==========================================="
         GET_QRCODE=$(curl -s "https://nano.to/cloud/qrcode?address=$address" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
         QRCODE=$(jq -r '.acii' <<< "$GET_QRCODE")
@@ -80,7 +80,7 @@ EOF
         if [[ "$4" == "--check" ]]; then
             CHECK_CLAIM=$(curl -s "https://nano.to/cloud/verify?username=$2" \
             -H "Accept: application/json" \
-            -H "session: $(cat $DIR/.n2/session)" \
+            -H "session: $(cat $DIR/.xno/session)" \
             -H "Content-Type:application/json" \
             --request POST)
             echo $CHECK_CLAIM
@@ -92,13 +92,13 @@ EOF
     --request GET)
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
 
     AMOUNT_RAW_CONSP=$(curl -s "https://nano.to/cloud/convert/toRaw/1.133" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
 
@@ -157,7 +157,7 @@ EOF
             
             ESD=$(curl -s "https://nano.to/cloud/username/$2" \
             -H "Accept: application/json" \
-            -H "session: $(cat $DIR/.n2/session)" \
+            -H "session: $(cat $DIR/.xno/session)" \
             -H "Content-Type:application/json" \
             --request POST \
             --data @<(cat <<EOF
@@ -189,7 +189,7 @@ EOF
             if [[ $5 == '--git' ]] || [[ $5 == '--github' ]] || [[ $5 == 'git' ]] || [[ $5 == 'github' ]] || [[ $5 == '-g' ]]; then
                 ESD=$(curl -s "https://nano.to/cloud/username/$2" \
                 -H "Accept: application/json" \
-                -H "session: $(cat $DIR/.n2/session)" \
+                -H "session: $(cat $DIR/.xno/session)" \
                 -H "Content-Type:application/json" \
                 --request POST \
                 --data @<(cat <<EOF
@@ -203,7 +203,7 @@ EOF
             if [[ $5 == 'remove' ]] || [[ $5 == '--remove' ]]; then
                 ESD=$(curl -s "https://nano.to/cloud/username/$2" \
                 -H "Accept: application/json" \
-                -H "session: $(cat $DIR/.n2/session)" \
+                -H "session: $(cat $DIR/.xno/session)" \
                 -H "Content-Type:application/json" \
                 --request POST \
                 --data '{ "remove_website": "true" }')
@@ -216,7 +216,7 @@ EOF
                 # echo $CONTENT
                 EFD=$(curl -s "https://nano.to/cloud/username/$2" \
                 -H "Accept: application/json" \
-                -H "session: $(cat $DIR/.n2/session)" \
+                -H "session: $(cat $DIR/.xno/session)" \
                 -H "Content-Type:application/json" \
                 --request POST \
                 --data @<(cat <<EOF
@@ -234,7 +234,7 @@ EOF
                 # echo $CONTENT
                 EFD=$(curl -s "https://nano.to/cloud/username/$2" \
                 -H "Accept: application/json" \
-                -H "session: $(cat $DIR/.n2/session)" \
+                -H "session: $(cat $DIR/.xno/session)" \
                 -H "Content-Type:application/json" \
                 --request POST \
                 --data @<(cat <<EOF
@@ -257,7 +257,7 @@ EOF
 
         ODF=$(curl -s "https://nano.to/cloud/username/$2" \
 -H "Accept: application/json" \
--H "session: $(cat $DIR/.n2/session)" \
+-H "session: $(cat $DIR/.xno/session)" \
 -H "Content-Type:application/json" \
 --request POST \
 --data @<(cat <<EOF
@@ -279,7 +279,7 @@ EOF
     if [[ $3 == "--prices" ]] || [[ $3 == "--price" ]]; then
         PRICE_CHECK=$(curl -s "https://nano.to/lease/$2" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
         PLANS=$(jq -r '.plans' <<< "$PRICE_CHECK")
@@ -338,7 +338,7 @@ EOF
             # /usr/local/bin/xno version
         ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request GET)
 
@@ -366,13 +366,13 @@ EOF
 
         # CHECKOUT=$(curl -s "https://nano.to/cloud/lease/$2/$4?work=$WORK" \
         #   -H "Accept: application/json" \
-        #   -H "session: $(cat $DIR/.n2/session)" \
+        #   -H "session: $(cat $DIR/.xno/session)" \
         #   -H "Content-Type:application/json" \
         #   --request GET)
 
         LEASE_ATTEMPT=$(curl -s "https://nano.to/cloud/lease/$2" \
         -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
         --request POST \
         --data @<(cat <<EOF
@@ -501,14 +501,14 @@ fi
 
 if [[ "$1" = "key" ]] || [[ "$1" = "k" ]] || [[ "$1" = "-key" ]] || [[ "$1" = "-api" ]] || [[ "$1" = "--api" ]] || [[ "$2" = "-k" ]]; then
 
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
         echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register' first."
         exit 0
     fi
 
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
 
@@ -537,14 +537,14 @@ fi
 
 if [[ "$2" = "address" ]] || [[ "$2" = "-address" ]] || [[ "$2" = "--address" ]] || [[ "$2" = "-a" ]]; then
 
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
         echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register' first."
         exit 0
     fi
 
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
 
@@ -564,11 +564,11 @@ fi
                                                      
 
 if [[ "$1" = "logout" ]]; then
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
         echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register'."
         exit 0
     else
-        rm $DIR/.n2/session 2> /dev/null
+        rm $DIR/.xno/session 2> /dev/null
         # echo "Ok:  of Nano.to."
         echo "${GREEN}Cloud${NC}: You logged out."
         exit 0
@@ -586,14 +586,14 @@ fi
 
 if [[ "$2" = "email" ]] || [[ "$2" = "-email" ]] || [[ "$2" = "--email" ]] || [[ "$2" = "-e" ]]; then
 
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
         echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register' first."
         exit 0
     fi
 
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
 

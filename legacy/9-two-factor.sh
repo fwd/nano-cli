@@ -1,13 +1,13 @@
 
 function setup_2fa() {
-    if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
         echo "${CYAN}Cloud${NC}: Not logged in. Use 'n2 login' or 'n2 register' first."
         exit 0
     fi
 
     HAS_TWO_FACTOR=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
     --request GET | jq '.two_factor')
 
@@ -18,7 +18,7 @@ function setup_2fa() {
 
     NEW_SETUP=$(curl -s "https://nano.to/user/two-factor" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
     --request GET)
 
@@ -44,7 +44,7 @@ function setup_2fa() {
 
     OTP_ATTEMPT=$(curl -s "https://nano.to/user/two-factor" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request POST \
     --data @<(cat <<EOF
@@ -60,7 +60,7 @@ EOF
 function remove_2fa() {
     HAS_TWO_FACTOR=$(curl -s "https://nano.to/cloud/account" \
         -H "Accept: application/json" \
-        -H "session: $(cat $DIR/.n2/session)" \
+        -H "session: $(cat $DIR/.xno/session)" \
         -H "Content-Type:application/json" \
     --request GET | jq '.two_factor')
 
@@ -85,7 +85,7 @@ function remove_2fa() {
 
 REMOVE_OTP_ATTEMPT=$(curl -s "https://nano.to/user/two-factor/disable" \
 -H "Accept: application/json" \
--H "session: $(cat $DIR/.n2/session)" \
+-H "session: $(cat $DIR/.xno/session)" \
 -H "Content-Type:application/json" \
 --request POST \
 --data @<(cat <<EOF

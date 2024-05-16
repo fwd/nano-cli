@@ -44,7 +44,7 @@ EOF
         fi
 curl -s "https://nano.to/cloud/shop/address" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request POST \
     --data @<(cat <<EOF
@@ -62,7 +62,7 @@ EOF
         fi
 curl -s "https://nano.to/cloud/shop/pow" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request POST \
     --data @<(cat <<EOF

@@ -1,6 +1,6 @@
 function cloud_receive() {
 
-  if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
     echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register' first."
     exit 0
   fi
@@ -10,7 +10,7 @@ function cloud_receive() {
   if [[ $1 =~ $re ]] || [[ $1 == "" ]] ; then
     ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
     account=$(jq -r '.email' <<< "$ACCOUNT")
@@ -18,7 +18,7 @@ function cloud_receive() {
   else
     ACCOUNT=$(curl -s "https://nano.to/$1/account" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
     account=$1
@@ -28,13 +28,13 @@ function cloud_receive() {
   if [[ $1 =~ $re ]] || [[ $1 == "" ]] ; then
     GET_QRCODE=$(curl -s "https://nano.to/cloud/qrcode?address=$address&amount=$1" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request GET)
   else
     GET_QRCODE=$(curl -s "https://nano.to/cloud/qrcode?address=$address&amount=$2" \
       -H "Accept: application/json" \
-      -H "session: $(cat $DIR/.n2/session)" \
+      -H "session: $(cat $DIR/.xno/session)" \
       -H "Content-Type:application/json" \
       --request GET)
   fi

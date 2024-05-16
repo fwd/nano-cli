@@ -16,7 +16,7 @@ GREEN2=$'\e[1;92m'
 DIR=$(eval echo "~$different_user")
 
 # Project Folder
-mkdir -p $DIR/.n2
+mkdir -p $DIR/.xno
 
 # Install '7z' if needed.
 # if ! command -v 7z &> /dev/null; then
@@ -91,11 +91,11 @@ function findAddress() {
 
 function get_accounts() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -105,11 +105,11 @@ function get_accounts() {
     exit 0
   fi
 
-  if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
       WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-      echo $WALLET_ID > $DIR/.n2/wallet
+      echo $WALLET_ID > $DIR/.xno/wallet
   else
-      WALLET_ID=$(cat $DIR/.n2/wallet)
+      WALLET_ID=$(cat $DIR/.xno/wallet)
   fi
 
   accounts=$(curl -s '[::1]:7076' \
@@ -137,11 +137,11 @@ EOF
 
 function get_balance() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -177,11 +177,11 @@ function get_balance() {
     exit 0
   fi
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
 ACCOUNT=$(curl -s $NODE_URL \
@@ -206,11 +206,11 @@ EOF
 
 function list_accounts() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-    NODE_URL=$(cat $DIR/.n2/node)
+    NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -274,11 +274,11 @@ EOF
 
 function print_address() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -311,11 +311,11 @@ function print_address() {
 
 function print_balance() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -396,13 +396,13 @@ function print_balance() {
     pending_in_decimal_value=$(raw_to_nano $account_pending)
   fi
 
-  mkdir -p $DIR/.n2/data
-  metadata=$(find $DIR/.n2/data -maxdepth 1 -type f | wc -l | xargs)
+  mkdir -p $DIR/.xno/data
+  metadata=$(find $DIR/.xno/data -maxdepth 1 -type f | wc -l | xargs)
 
-  if [[ $(cat $DIR/.n2/title 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/title 2>/dev/null) == "" ]]; then
       CLI_TITLE="        NANO CLI (N2)"
   else
-      CLI_TITLE=$(cat $DIR/.n2/title)
+      CLI_TITLE=$(cat $DIR/.xno/title)
   fi
 
   if [[ "$3" == "--json" ]] || [[ "$4" == "--json" ]] || [[ "$5" == "--json" ]]; then
@@ -478,11 +478,11 @@ EOF
 
 function print_history() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -526,11 +526,11 @@ EOF
 
 function print_pending() {
 
-  if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
       NODE_URL='[::1]:7076'
-      echo $NODE_URL > $DIR/.n2/node
+      echo $NODE_URL > $DIR/.xno/node
   else
-      NODE_URL=$(cat $DIR/.n2/node)
+      NODE_URL=$(cat $DIR/.xno/node)
   fi
 
   if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -703,11 +703,11 @@ if [[ "$1" = "pow" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     POW_ATTEMPT=$(curl -s $NODE_URL \
@@ -732,11 +732,11 @@ fi
 
 if [[ "$1" = "receive" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -746,18 +746,18 @@ if [[ "$1" = "receive" ]]; then
         exit 0
     fi
 
-    # if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    # if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
     #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
     #   exit 0
     # else
-    #   NODE_PATH=$(cat $DIR/.n2/path)
+    #   NODE_PATH=$(cat $DIR/.xno/path)
     # fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     accounts_on_file=$(get_accounts)
@@ -806,11 +806,11 @@ fi
 
 if [[ "$1" = "node" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -820,11 +820,11 @@ if [[ "$1" = "node" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -847,11 +847,11 @@ fi
 
 if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -861,11 +861,11 @@ if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; 
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -898,11 +898,11 @@ fi
 
 if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
 
@@ -917,11 +917,11 @@ if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -964,11 +964,11 @@ fi
 
 if [[ "$1" = "node" ]] && [[ "$2" = "start" ]] || [[ "$1" = "start" ]] || [[ "$1" = "up" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     cd $NODE_PATH && docker-compose start nano-node > /dev/null
@@ -979,11 +979,11 @@ fi
 
 if [[ "$1" = "unlock" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     sed -i 's/enable_control = false/enable_control = true/g' "$NODE_PATH/nano-node/Nano/config-rpc.toml"
@@ -994,11 +994,11 @@ fi
 
 if [[ "$1" = "lock" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     sed -i 's/enable_control = true/enable_control = false/g' "$NODE_PATH/nano-node/Nano/config-rpc.toml"
@@ -1010,11 +1010,11 @@ fi
 
 if [[ "$1" = "node" ]] && [[ "$2" = "stop" ]] || [[ "$1" = "stop" ]] || [[ "$1" = "down" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     cd $NODE_PATH && docker-compose stop nano-node > /dev/null
@@ -1045,11 +1045,11 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'n2 config path PATH'. You will need ~200GB of space."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     # Coming soon
@@ -1166,11 +1166,11 @@ fi
 
 if [[ "$1" = "v" ]] || [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]] || [[ "$1" = "version" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -1203,25 +1203,41 @@ fi
 # ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
 # ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+
+# if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
+#     OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+#     curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+#     sudo chmod +x /usr/local/bin/xno
+#     NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+#     echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
+#     exit 0
+# fi
                                                   
-if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "install" ] || [ "$1" = "--install" ]  || [ "$1" = "--update" ] || [ "$1" = "update" ]; then
+if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgrade" ] || [ "$1" = "--upgrade" ] || [ "$1" = "update" ]; then
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
-        sudo rm /usr/local/bin/xno
-        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/xno
+        OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        curl -sL "https://github.com/fwd/nano-cli/raw/dev/n2.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
-        echo "${GREEN}N2${NC}: Installed latest development version."
+        NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        echo "${GREEN}NANO CLI Installed${NC}: DEV ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    if [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
-        sudo rm /usr/local/bin/xno
-        curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+    if [ "$2" = "" ] || [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
+        OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
-        echo "${GREEN}N2${NC}: Installed N2 $VERSION."
+        NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        echo "${GREEN}NANO CLI Installed${NC}: STABLE ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
-    sudo chmod +x /usr/local/bin/xno
-    echo "${GREEN}N2${NC}: Installed N2 $VERSION."
+    # curl -s -L "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+    # sudo chmod +x /usr/local/bin/xno
+    # echo "${GREEN}XNO${NC}: Installed CLI $VERSION."
+    # OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+    # curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+    # sudo chmod +x /usr/local/bin/xno
+    # NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+    # echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
     exit 0
 fi
 
@@ -1234,10 +1250,10 @@ fi
 
 if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
     sudo rm /usr/local/bin/xno
-    rm $DIR/.n2/wallet
-    rm $DIR/.n2/accounts
-    rm $DIR/.n2/cache
-    rm -rf $DIR/.n2/data
+    rm $DIR/.xno/wallet
+    rm $DIR/.xno/accounts
+    rm $DIR/.xno/cache
+    rm -rf $DIR/.xno/data
     echo "CLI removed. Thanks for using N2. Hope to see you soon."
     exit 0
 fi

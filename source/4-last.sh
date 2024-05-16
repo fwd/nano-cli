@@ -20,11 +20,11 @@ fi
 
 if [[ "$1" = "v" ]] || [[ "$1" = "-v" ]] || [[ "$1" = "--version" ]] || [[ "$1" = "version" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -57,25 +57,41 @@ fi
 # ██║   ██║██╔═══╝ ██║  ██║██╔══██║   ██║   ██╔══╝  
 # ╚██████╔╝██║     ██████╔╝██║  ██║   ██║   ███████╗
 #  ╚═════╝ ╚═╝     ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+
+# if [[ $1 == "upgrade" ]] || [[ $1 == "--upgrade" ]]  || [[ $1 == "-upgrade" ]]; then
+#     OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+#     curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+#     sudo chmod +x /usr/local/bin/xno
+#     NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+#     echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
+#     exit 0
+# fi
                                                   
-if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "install" ] || [ "$1" = "--install" ]  || [ "$1" = "--update" ] || [ "$1" = "update" ]; then
+if [ "$1" = "u" ] || [ "$2" = "-u" ] || [ "$1" = "--update" ] || [ "$1" = "upgrade" ] || [ "$1" = "--upgrade" ] || [ "$1" = "update" ]; then
     if [ "$2" = "--dev" ] || [ "$2" = "dev" ]; then
-        sudo rm /usr/local/bin/xno
-        curl -s -L "https://github.com/fwd/n2/raw/dev/n2.sh" -o /usr/local/bin/xno
+        OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        curl -sL "https://github.com/fwd/nano-cli/raw/dev/n2.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
-        echo "${GREEN}N2${NC}: Installed latest development version."
+        NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        echo "${GREEN}NANO CLI Installed${NC}: DEV ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    if [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
-        sudo rm /usr/local/bin/xno
-        curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
+    if [ "$2" = "" ] || [ "$2" = "--prod" ] || [ "$2" = "prod" ]; then
+        OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
         sudo chmod +x /usr/local/bin/xno
-        echo "${GREEN}N2${NC}: Installed N2 $VERSION."
+        NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+        echo "${GREEN}NANO CLI Installed${NC}: STABLE ${OLD_VERSION} -> ${NEW_VERSION}"
         exit 0
     fi
-    curl -s -L "https://github.com/fwd/n2/raw/main/n2.sh" -o /usr/local/bin/xno
-    sudo chmod +x /usr/local/bin/xno
-    echo "${GREEN}N2${NC}: Installed N2 $VERSION."
+    # curl -s -L "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+    # sudo chmod +x /usr/local/bin/xno
+    # echo "${GREEN}XNO${NC}: Installed CLI $VERSION."
+    # OLD_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+    # curl -sL "https://github.com/fwd/nano-cli/raw/main/n2.sh" -o /usr/local/bin/xno
+    # sudo chmod +x /usr/local/bin/xno
+    # NEW_VERSION=$(grep -E '^VERSION=' /usr/local/bin/xno | awk -F '=' '{print $2}' | tr -d '"')
+    # echo "${GREEN}N2 Upgraded${NC}: ${OLD_VERSION} -> ${NEW_VERSION}"
     exit 0
 fi
 
@@ -88,10 +104,10 @@ fi
 
 if [[ "$1" = "--uninstall" ]] || [[ "$1" = "-u" ]]; then
     sudo rm /usr/local/bin/xno
-    rm $DIR/.n2/wallet
-    rm $DIR/.n2/accounts
-    rm $DIR/.n2/cache
-    rm -rf $DIR/.n2/data
+    rm $DIR/.xno/wallet
+    rm $DIR/.xno/accounts
+    rm $DIR/.xno/cache
+    rm -rf $DIR/.xno/data
     echo "CLI removed. Thanks for using N2. Hope to see you soon."
     exit 0
 fi

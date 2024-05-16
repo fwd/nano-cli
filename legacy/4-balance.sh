@@ -1,13 +1,13 @@
 function cloud_balance() {
 
-  if [[ $(cat $DIR/.n2/session 2>/dev/null) == "" ]]; then
+  if [[ $(cat $DIR/.xno/session 2>/dev/null) == "" ]]; then
     echo "${CYAN}Cloud${NC}: You're not logged in. Use 'n2 login' or 'n2 register' first."
     exit 0
   fi
 
   ACCOUNT=$(curl -s "https://nano.to/cloud/account" \
   -H "Accept: application/json" \
-  -H "session: $(cat $DIR/.n2/session)" \
+  -H "session: $(cat $DIR/.xno/session)" \
   -H "Content-Type:application/json" \
   --request GET)
 
@@ -24,7 +24,7 @@ function cloud_balance() {
   fi
 
   if [[ $(jq -r '.code' <<< "$ACCOUNT") == "401" ]]; then
-    rm $DIR/.n2/session
+    rm $DIR/.xno/session
     # echo
     echo "==============================="
     echo "    LOGGED OUT FOR SECURITY    "
@@ -59,7 +59,7 @@ EOF
 
   VERIFY_ATTEMPT=$(curl -s "https://nano.to/cloud/verify?code=$EMAIL_OTP" \
     -H "Accept: application/json" \
-    -H "session: $(cat $DIR/.n2/session)" \
+    -H "session: $(cat $DIR/.xno/session)" \
     -H "Content-Type:application/json" \
     --request POST)
 
@@ -140,7 +140,7 @@ if [[ $1 == "balance" ]]; then
 cat <<EOF
 ${GREEN}Local${NC}: Non-custodial local Wallet is in-development. 
 
-Github: https://github.com/fwd/n2
+Github: https://github.com/fwd/nano-cli
 Twitter: https://twitter.com/nano2dev
 
 EOF

@@ -92,11 +92,11 @@ if [[ "$1" = "pow" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     POW_ATTEMPT=$(curl -s $NODE_URL \
@@ -121,11 +121,11 @@ fi
 
 if [[ "$1" = "receive" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
         NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -135,18 +135,18 @@ if [[ "$1" = "receive" ]]; then
         exit 0
     fi
 
-    # if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    # if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
     #   echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
     #   exit 0
     # else
-    #   NODE_PATH=$(cat $DIR/.n2/path)
+    #   NODE_PATH=$(cat $DIR/.xno/path)
     # fi
 
-    if [[ $(cat $DIR/.n2/wallet 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/wallet 2>/dev/null) == "" ]]; then
         WALLET_ID=$(docker exec -it nano-node /usr/bin/nano_node --wallet_list | grep 'Wallet ID' | awk '{ print $NF}' | tr -d '[:space:]' )
-        echo $WALLET_ID > $DIR/.n2/wallet
+        echo $WALLET_ID > $DIR/.xno/wallet
     else
-        WALLET_ID=$(cat $DIR/.n2/wallet)
+        WALLET_ID=$(cat $DIR/.xno/wallet)
     fi
 
     accounts_on_file=$(get_accounts)
@@ -195,11 +195,11 @@ fi
 
 if [[ "$1" = "node" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -209,11 +209,11 @@ if [[ "$1" = "node" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -236,11 +236,11 @@ fi
 
 if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
     if curl -sL --fail $NODE_URL -o /dev/null; then
@@ -250,11 +250,11 @@ if [[ "$1" = "block_count" ]] || [[ "$1" = "count" ]] || [[ "$1" = "blocks" ]]; 
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -287,11 +287,11 @@ fi
 
 if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
 
-    if [[ $(cat $DIR/.n2/node 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/node 2>/dev/null) == "" ]]; then
          NODE_URL='[::1]:7076'
-        echo $NODE_URL > $DIR/.n2/node
+        echo $NODE_URL > $DIR/.xno/node
     else
-        NODE_URL=$(cat $DIR/.n2/node)
+        NODE_URL=$(cat $DIR/.xno/node)
     fi
 
 
@@ -306,11 +306,11 @@ if [[ "$1" = "sync" ]] || [[ "$1" = "status" ]]; then
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     NODE_VERSION=$(curl -s $NODE_URL \
@@ -353,11 +353,11 @@ fi
 
 if [[ "$1" = "node" ]] && [[ "$2" = "start" ]] || [[ "$1" = "start" ]] || [[ "$1" = "up" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     cd $NODE_PATH && docker-compose start nano-node > /dev/null
@@ -368,11 +368,11 @@ fi
 
 if [[ "$1" = "unlock" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     sed -i 's/enable_control = false/enable_control = true/g' "$NODE_PATH/nano-node/Nano/config-rpc.toml"
@@ -383,11 +383,11 @@ fi
 
 if [[ "$1" = "lock" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     sed -i 's/enable_control = true/enable_control = false/g' "$NODE_PATH/nano-node/Nano/config-rpc.toml"
@@ -399,11 +399,11 @@ fi
 
 if [[ "$1" = "node" ]] && [[ "$2" = "stop" ]] || [[ "$1" = "stop" ]] || [[ "$1" = "down" ]]; then
     
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not setup.${NC} Use 'n2 config path PATH'."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     cd $NODE_PATH && docker-compose stop nano-node > /dev/null
@@ -434,11 +434,11 @@ if [[ "$1" = "setup" ]] || [[ "$1" = "--setup" ]] || [[ "$1" = "install" ]] || [
         exit 0
     fi
 
-    if [[ $(cat $DIR/.n2/path 2>/dev/null) == "" ]]; then
+    if [[ $(cat $DIR/.xno/path 2>/dev/null) == "" ]]; then
       echo "${RED}Error:${NC} ${CYAN}Node Path not provided.${NC} Use 'n2 config path PATH'. You will need ~200GB of space."
       exit 0
     else
-      NODE_PATH=$(cat $DIR/.n2/path)
+      NODE_PATH=$(cat $DIR/.xno/path)
     fi
 
     # Coming soon
