@@ -140,7 +140,7 @@ if [[ $1 == "balance" ]]; then
 cat <<EOF
 ${GREEN}Local${NC}: Non-custodial local Wallet is in-development. 
 
-Github: https://github.com/fwd/nano-cli
+Github: https://github.com/nano-currency/nano-node-cli
 Twitter: https://twitter.com/nano2dev
 
 EOF
