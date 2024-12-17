@@ -1,26 +1,26 @@
 <p align="center">
-  <img src="https://github.com/nano-currency/nano-cli/raw/main/.github/banner.png" alt="Prompts" width="470" />
+  <img src="https://github.com/nano-to/nano-cli/raw/main/.github/banner.png" alt="Prompts" width="470" />
 </p>
 
 <h2 align="center">Nano Command Line Tool</h2>
 
 <h3 align="center">Version: Alpha-0.1.0</h3>
 
-![line](https://github.com/nano-currency/nano-cli/raw/main/.github/line.png)
+![line](https://github.com/nano-to/nano-cli/raw/main/.github/line.png)
 
 ## ❯ Install
 
 ```bash
-curl -sL "https://raw.github.com/nano-currency/nano-cli/main/install.sh" | sh
+curl -sL "https://raw.github.com/nano-to/nano-cli/main/install.sh" | sh
 ```
 
-![line](https://github.com/nano-currency/nano-cli/raw/main/.github/line.png)
+![line](https://github.com/nano-to/nano-cli/raw/main/.github/line.png)
 
 ## ❯ Contributing
 
 Give a ⭐️ if this project helped you!
 
-Contributions, issues and feature requests are welcome at [issues page](https://github.com/nano-currency/nano-cli/issues).
+Contributions, issues and feature requests are welcome at [issues page](https://github.com/nano-to/nano-cli/issues).
 
 ## ❯ License
 
@@ -34,4 +34,4 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## ❯ Stargazers
 
-[![Stargazers over time](https://starchart.cc/nano-currency/nano-cli.svg)](https://github.com/nano-currency/nano-cli)
+[![Stargazers over time](https://starchart.cc/nano-to/nano-cli.svg)](https://github.com/nano-to/nano-cli)
